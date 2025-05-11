@@ -136,10 +136,6 @@ For Streamlit Cloud:
 2. Log in to [Streamlit Cloud](https://streamlit.io/cloud)
 3. Create a new app and connect it to your repository
 
-## Important Note
-
-This application is for educational purposes only and should not replace professional medical advice. The predictions are based on a machine learning model and should be considered as general guidance rather than a definitive diagnosis.
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -147,4 +143,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgments
 
 - Data source: [Kaggle Diabetes Prediction Dataset](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset)
-- Built with [Streamlit](https://streamlit.io/)"# -diabetes_prediction_app" 
