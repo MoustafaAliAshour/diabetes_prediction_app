@@ -136,7 +136,7 @@ with tab1:
                     st.markdown(f"<p class='risk-factor-item'>{factor}</p>", unsafe_allow_html=True)
                 st.markdown("</div>", unsafe_allow_html=True)
 
-            # Generate and display health recommendations without background color or cards
+ 
             recommendations = generate_health_recommendations(prediction, risk_factors)
 
             st.markdown("<h3 class='subheader'>Health Recommendations</h3>", unsafe_allow_html=True)
