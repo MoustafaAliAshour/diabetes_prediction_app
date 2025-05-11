@@ -134,9 +134,7 @@ with tab1:
             else:
                 risk_class = "risk-high"
             
-            # Create result card
-            st.markdown(f"<div class='card {risk_class}'>", unsafe_allow_html=True)
-            
+
             # Display prediction result
             if prediction == 1:
                 st.markdown("<p class='result-header diabetes-positive'>Higher Risk of Diabetes Detected</p>", unsafe_allow_html=True)
