@@ -571,7 +571,7 @@ with tab4:
     
     # Create a dropdown to select different visualizations
     eda_options = {
-        "Age Distribution": "Age Distribution.png",
+        "Age Distribution": "ُEDA\Age Distribution.png",
         "BMI Distribution": "BMI Distribution.png",
         "Gender Distribution": "Gender Distribution.png",
         "Diabetes Distribution": "Diabetes Distribution.png",
