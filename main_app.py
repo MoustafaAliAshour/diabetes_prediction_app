@@ -129,51 +129,19 @@ with tab1:
 
             risk_factors = display_risk_factors(input_data)
             
-            # Display identified risk factors with better styling
+           # Display identified risk factors without background color or cards
             if risk_factors:
-                st.markdown("""
-                <div class='section-container'>
-                    <h3 class='subheader'>🔎 Identified Risk Factors</h3>
-                """, unsafe_allow_html=True)
-
+                st.markdown("<h3 class='subheader'>Identified Risk Factors</h3>", unsafe_allow_html=True)
                 for factor in risk_factors:
-                    st.markdown(f"""
-                    <div class='risk-factor-item' style='
-                        background-color: #fff3cd;
-                        border-left: 6px solid #ffa502;
-                        padding: 10px 15px;
-                        border-radius: 8px;
-                        margin-bottom: 8px;
-                        font-weight: 500;
-                    '>
-                        ⚠️ {factor}
-                    </div>
-                    """, unsafe_allow_html=True)
-
+                    st.markdown(f"<p class='risk-factor-item'>{factor}</p>", unsafe_allow_html=True)
                 st.markdown("</div>", unsafe_allow_html=True)
 
-            # Display health recommendations with styling
+            # Generate and display health recommendations without background color or cards
             recommendations = generate_health_recommendations(prediction, risk_factors)
 
-            st.markdown("""
-            <div class='section-container'>
-                <h3 class='subheader'>💡 Health Recommendations</h3>
-            """, unsafe_allow_html=True)
-
-            for i, recommendation in enumerate(recommendations, start=1):
-                st.markdown(f"""
-                <div class='recommendation-item' style='
-                    background-color: #e8f5e9;
-                    border-left: 6px solid #43a047;
-                    padding: 10px 15px;
-                    border-radius: 8px;
-                    margin-bottom: 8px;
-                    font-weight: 500;
-                '>
-                    ✅ {recommendation}
-                </div>
-                """, unsafe_allow_html=True)
-
+            st.markdown("<h3 class='subheader'>Health Recommendations</h3>", unsafe_allow_html=True)
+            for i, recommendation in enumerate(recommendations):
+                st.markdown(f"<p class='recommendation-item'>{recommendation}</p>", unsafe_allow_html=True)
             st.markdown("</div>", unsafe_allow_html=True)
 
     
