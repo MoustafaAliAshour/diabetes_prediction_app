@@ -143,14 +143,14 @@ with tab1:
             if prediction == 1:
                  st.markdown("""
                 <div style='text-align: center;'>
-                     <p style="font-size: 1.5em;" class='result-header diabetes-positive'>⚠️ Higher Risk of Diabetes Detected</p>
+                     <p style="font-size: 4.5em;" class='result-header diabetes-positive'>⚠️ Higher Risk of Diabetes Detected</p>
                     <p>Based on your input, our model indicates a <strong>higher risk</strong> of developing diabetes.<br>This is <strong>not a diagnosis</strong>—please consult a healthcare provider for further evaluation.</p>
                 </div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown("""
                 <div style='text-align: center;'>
-                  <p style="font-size: 1.5em;" class='result-header diabetes-negative'>✅ Lower Risk of Diabetes Detected</p>
+                  <p style="font-size: 4.5em;" class='result-header diabetes-negative'>✅ Lower Risk of Diabetes Detected</p>
                     <p>Your data suggests a <strong>lower risk</strong> of diabetes.<br>Keep up your healthy habits!</p>
                 </div>
                 """, unsafe_allow_html=True)
