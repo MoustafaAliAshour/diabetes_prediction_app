@@ -619,7 +619,7 @@ with tab4:
         "Gender Distribution": "Gender Distribution.png",
         "Diabetes Distribution": "Diabetes Distribution.png",
         "Smoking History Distribution": "Smoking History Distribution.png",
-        "Age Distribution": "ُAge Distribution.png",
+        "Age Distribution": "Age Distribution.png",
         "Age vs Diabetes": "Age vs Diabetes.png",
         "BMI vs Diabetes": "BMI vs Diabetes.png",
         "Blood Glucose vs Diabetes": "Blood Glucose Level vs Diabetes.png",
