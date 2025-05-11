@@ -156,7 +156,7 @@ with tab1:
                 """, unsafe_allow_html=True)
 
             # Generate and display health recommendations
-            recommendations = generate_health_recommendations(prediction, risk_factors)
+            recommendations = generate_health_recommendations(prediction)
             
             st.markdown("<h3 class='subheader'>Health Recommendations</h3>", unsafe_allow_html=True)
             for i, recommendation in enumerate(recommendations):

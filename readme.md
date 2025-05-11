@@ -69,6 +69,25 @@ diabetes_prediction_app/
 ├── requirements.txt        # Project dependencies
 ├── run.sh                  # Setup and run script
 ├── README.md               # Project documentation
+├── EDA
+│   ├── Age Distribution by Diabetes Status and Gender.png
+│   ├── Age Distribution.png
+│   ├── Age vs BMI.png
+│   ├── Age vs Diabetes.png
+│   ├── Blood Glucose Level vs Diabetes.png
+│   ├── BMI Distribution by Diabetes Status and Gender.png
+│   ├── BMI vs Diabetes.png         
+│   ├── col Distribution.png
+│   ├── confusion_matrix.png          
+│   ├── Correlation with Diabetes.png
+│   ├── Diabetes Distribution.png
+│   ├── Gender Distribution.png         
+│   ├── Gender vs Diabetes.png
+│   ├── HbA1c level vs Diabetes.png           
+│   ├── pairplot.png
+│   ├── Smoking History Distribution.png
+│   ├── xgb_feature_importances.png               
+│   └──       
 ├── models/                 # Saved model files
 │   ├── xgboost_diabetes_model.pkl
 │   └── preprocessor_pipeline.pkl
