@@ -7,8 +7,8 @@ import io
 import base64
 import time
 from utils import (
-    load_model_and_preprocessor, preprocess_input, predict_diabetes,
-    create_gauge_chart, display_feature_importance,
+load_model_and_preprocessor, preprocess_input, predict_diabetes,
+    create_gauge_chart, display_feature_importance, display_risk_factors,
     generate_health_recommendations, recategorize_smoking
 )
 
@@ -127,13 +127,22 @@ with tab1:
                 </div>
                 """, unsafe_allow_html=True)
 
-            # ✅ Generate recommendations without passing `risk_factors`
-            recommendations = generate_health_recommendations(prediction)
-
+            risk_factors = display_risk_factors(input_data)
+            
+            if risk_factors:
+                st.markdown("<h3 class='subheader'>Identified Risk Factors</h3>", unsafe_allow_html=True)
+                for factor in risk_factors:
+                    st.markdown(f"<div class='risk-factor-item'>{factor}</div>", unsafe_allow_html=True)
+                st.markdown("</div>", unsafe_allow_html=True)
+            
+            # Generate and display health recommendations
+            recommendations = generate_health_recommendations(prediction, risk_factors)
+            
             st.markdown("<h3 class='subheader'>Health Recommendations</h3>", unsafe_allow_html=True)
-            for rec in recommendations:
-                st.markdown(f"<p class='recommendation-item'>{rec}</p>", unsafe_allow_html=True)
-
+            for i, recommendation in enumerate(recommendations):
+                st.markdown(f"<p class='recommendation-item'>{recommendation}</p>", unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
+    
     else:
         st.info("Enter your health information in the sidebar and click 'Predict Diabetes Risk' to get your assessment.")
         
