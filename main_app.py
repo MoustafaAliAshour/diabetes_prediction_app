@@ -562,6 +562,49 @@ with tab3:
 with tab4:
     st.markdown("<h2 class='subheader'>Exploratory Data Analysis</h2>", unsafe_allow_html=True)
     
+    # Dataset Statistics Section
+    st.markdown("""
+    ## Dataset Overview
+    
+    Here are the key statistics about the dataset used for training the diabetes prediction model:
+    """)
+    
+    # Display the statistics table
+    st.markdown("### Basic Statistics")
+    stats_df = pd.DataFrame({
+        'Metric': ['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],
+        'age': [96128.00, 41.80, 22.46, 0.08, 24.00, 43.00, 59.00, 80.00],
+        'hypertension': [96128.00, 0.08, 0.27, 0.00, 0.00, 0.00, 0.00, 1.00],
+        'heart_disease': [96128.00, 0.04, 0.20, 0.00, 0.00, 0.00, 0.00, 1.00],
+        'bmi': [96128.00, 27.32, 6.77, 10.01, 23.40, 27.32, 29.86, 95.69],
+        'HbA1c_level': [96128.00, 5.53, 1.07, 3.50, 4.80, 5.80, 6.20, 9.00],
+        'blood_glucose_level': [96128.00, 138.22, 40.91, 80.00, 100.00, 140.00, 159.00, 300.00],
+        'diabetes': [96128.00, 0.09, 0.28, 0.00, 0.00, 0.00, 0.00, 1.00]
+    })
+    st.dataframe(stats_df.set_index('Metric'), use_container_width=True)
+    
+    # Data Quality Information
+    st.markdown("""
+    ## Data Quality Analysis
+    
+    ### Duplicate Rows
+    - Number of duplicate rows: 3,854 (4% of dataset)
+    
+    ### Distinct Values
+    - Gender: 3 distinct values (Male, Female, Other - 'Other' was removed as it was only 0.00195% of data)
+    - Age: 102 distinct values
+    - Hypertension: 2 distinct values (0, 1)
+    - Heart Disease: 2 distinct values (0, 1)
+    - Smoking History: 6 distinct values
+    - BMI: 4,247 distinct values
+    - HbA1c Level: 18 distinct values
+    - Blood Glucose Level: 18 distinct values
+    - Diabetes: 2 distinct values (0, 1)
+    
+    ### Missing Values
+    - No missing values in any columns
+    """)
+    
     st.markdown("""
     ## Dataset Insights
     
@@ -571,7 +614,7 @@ with tab4:
     
     # Create a dropdown to select different visualizations
     eda_options = {
-        "Age Distribution": "ُEDA\Age Distribution.png",
+        "Age Distribution": "ُAge Distribution.png",
         "BMI Distribution": "BMI Distribution.png",
         "Gender Distribution": "Gender Distribution.png",
         "Diabetes Distribution": "Diabetes Distribution.png",
@@ -585,6 +628,7 @@ with tab4:
         "BMI Distribution by Diabetes Status and Gender": "BMI Distribution by Diabetes Status and Gender.png",
         "BMI vs Diabetes split by Gender": "BMI vs Diabetes split by Gender.png",
         "Age vs BMI": "Age vs BMI.png",
+        "Correlation Matrix Heatmap": "Correlation Matrix Heatmap.png",
         "Correlation with Diabetes": "Correlation with Diabetes.png",
         "Pairplot of Features": "pairplot.png",
         "Feature Importance": "xgb_feature_importances.png",
