@@ -36,10 +36,8 @@ st.markdown("<h1 class='main-header'>Diabetes Risk Prediction Tool</h1>", unsafe
 
 # App description
 st.markdown("""
-This application helps assess your risk of diabetes based on various health factors. 
+This application is the graduation project from DEPI and it helps by assessing risk of diabetes based on various health factors. 
 Enter your health information below to get a personalized risk assessment.
-
-**Note**: This tool is for educational purposes only and should not replace professional medical advice.
 """)
 
 # Create tabs
@@ -56,7 +54,7 @@ with tab1:
     gender = st.sidebar.selectbox("Gender", ["Male", "Female"], index=0, help="Select your gender")
     
     # BMI input
-    bmi = st.sidebar.slider("BMI", 10.0, 50.0, 25.0, 0.1, help="Body Mass Index (kg/m²)")
+    bmi = st.sidebar.slider("BMI", 10.0, 50.0, 25.0, 0.01, help="Body Mass Index (kg/m²)")
     
     # Calculate BMI option
     if st.sidebar.checkbox("Calculate BMI", help="Calculate BMI from height and weight"):
@@ -125,8 +123,7 @@ with tab1:
             # Get prediction
             prediction, prediction_proba = predict_diabetes(model, processed_input)
             
-            # Display results in a card
-            st.markdown("<h2 class='subheader'>Your Results</h2>", unsafe_allow_html=True)
+
             
             # Determine risk level class based on probability
             diabetes_probability = prediction_proba[1]
