@@ -25,7 +25,7 @@ An interactive Streamlit application for diabetes risk assessment based on healt
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/diabetes-prediction-app.git
+   git clone https://github.com/rezk1834/diabetes-prediction-app.git
    cd diabetes-prediction-app
    ```
 
