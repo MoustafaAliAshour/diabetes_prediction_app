@@ -132,7 +132,7 @@ with tab1:
             if risk_factors:
                 st.markdown("<h3 class='subheader'>Identified Risk Factors</h3>", unsafe_allow_html=True)
                 for factor in risk_factors:
-                    st.markdown(f"<div class='risk-factor-item'>{factor}</div>", unsafe_allow_html=True)
+                    st.markdown(f"<p class='risk-factor-item'>{factor}</p>", unsafe_allow_html=True)
                 st.markdown("</div>", unsafe_allow_html=True)
             
             # Generate and display health recommendations
