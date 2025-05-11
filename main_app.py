@@ -143,14 +143,14 @@ with tab1:
             if prediction == 1:
                  st.markdown("""
                 <div style='text-align: center;'>
-                    <p class='result-header diabetes-positive'>⚠️ Higher Risk of Diabetes Detected</p>
+                     <p style="font-size: 1.5em;" class='result-header diabetes-positive'>⚠️ Higher Risk of Diabetes Detected</p>
                     <p>Based on your input, our model indicates a <strong>higher risk</strong> of developing diabetes.<br>This is <strong>not a diagnosis</strong>—please consult a healthcare provider for further evaluation.</p>
                 </div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown("""
                 <div style='text-align: center;'>
-                    <p class='result-header diabetes-negative'>✅ Lower Risk of Diabetes Detected</p>
+                  <p style="font-size: 1.5em;" class='result-header diabetes-negative'>✅ Lower Risk of Diabetes Detected</p>
                     <p>Your data suggests a <strong>lower risk</strong> of diabetes.<br>Keep up your healthy habits!</p>
                 </div>
                 """, unsafe_allow_html=True)
@@ -162,7 +162,7 @@ with tab1:
                 st.markdown("<h3 class='subheader'>Identified Risk Factors</h3>", unsafe_allow_html=True)
                 for factor in risk_factors:
                     st.markdown(f"<div class='risk-factor-item'>{factor}</div>", unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
+               
             
             # Generate and display health recommendations
             recommendations = generate_health_recommendations(prediction, risk_factors)
