@@ -41,7 +41,7 @@ Enter your health information below to get a personalized risk assessment.
 """)
 
 # Create tabs
-tab1, tab2, tab3 = st.tabs(["Risk Assessment", "About Diabetes", "Model Insights"])
+tab1, tab2, tab3, tab4 = st.tabs(["Risk Assessment", "About Diabetes", "Model Insights", "Exploratory Data Analysis"])
 
 with tab1:
     # Sidebar for inputs
@@ -511,7 +511,6 @@ with tab3:
             
             with col2:
                 risk_class = "risk-high" if user_proba[1] > 0.7 else "risk-moderate" if user_proba[1] > 0.3 else "risk-low"
-                st.markdown(f"<div class='card {risk_class}'>", unsafe_allow_html=True)
                 st.markdown("<p class='result-header'>Your Scenario</p>", unsafe_allow_html=True)
                 st.markdown(f"""
                 - Age: {demo_age}
@@ -559,6 +558,138 @@ with tab3:
             else:
                 st.markdown("<p>All health metrics are within normal ranges.</p>", unsafe_allow_html=True)
 
+                
+with tab4:
+    st.markdown("<h2 class='subheader'>Exploratory Data Analysis</h2>", unsafe_allow_html=True)
+    
+    st.markdown("""
+    ## Dataset Insights
+    
+    This section provides visual insights from the dataset used to train the diabetes prediction model.
+    The visualizations help understand the relationships between different health factors and diabetes risk.
+    """)
+    
+    # Create a dropdown to select different visualizations
+    eda_options = {
+        "Age Distribution": "Age Distribution.png",
+        "BMI Distribution": "BMI Distribution.png",
+        "Gender Distribution": "Gender Distribution.png",
+        "Diabetes Distribution": "Diabetes Distribution.png",
+        "Smoking History Distribution": "Smoking History Distribution.png",
+        "Age vs Diabetes": "Age vs Diabetes.png",
+        "BMI vs Diabetes": "BMI vs Diabetes.png",
+        "Blood Glucose vs Diabetes": "Blood Glucose Level vs Diabetes.png",
+        "HbA1c Level vs Diabetes": "HbA1c level vs Diabetes.png",
+        "Gender vs Diabetes": "Gender vs Diabetes.png",
+        "Age Distribution by Diabetes Status and Gender": "Age Distribution by Diabetes Status and Gender.png",
+        "BMI Distribution by Diabetes Status and Gender": "BMI Distribution by Diabetes Status and Gender.png",
+        "BMI vs Diabetes split by Gender": "BMI vs Diabetes split by Gender.png",
+        "Age vs BMI": "Age vs BMI.png",
+        "Correlation with Diabetes": "Correlation with Diabetes.png",
+        "Pairplot of Features": "pairplot.png",
+        "Feature Importance": "xgb_feature_importances.png",
+        "Confusion Matrix": "confusion_matrix.png"
+    }
+    
+    selected_eda = st.selectbox("Select Visualization", list(eda_options.keys()))
+    
+    # Display the selected visualization
+    try:
+        image_path = f"EDA/{eda_options[selected_eda]}"
+        st.image(image_path, use_column_width=True)
+        
+        # Add descriptions for each visualization
+        if selected_eda == "Age Distribution":
+            st.markdown("""
+            **Insight**: Shows the distribution of ages in the dataset. Diabetes risk typically increases with age.
+            """)
+        elif selected_eda == "BMI Distribution":
+            st.markdown("""
+            **Insight**: Displays the distribution of BMI values. Higher BMI is associated with increased diabetes risk.
+            """)
+        elif selected_eda == "Gender Distribution":
+            st.markdown("""
+            **Insight**: Shows the gender distribution in the dataset. Some studies suggest gender differences in diabetes prevalence.
+            """)
+        elif selected_eda == "Diabetes Distribution":
+            st.markdown("""
+            **Insight**: Illustrates the proportion of diabetes cases in the dataset. This helps understand the class balance.
+            """)
+        elif selected_eda == "Age vs Diabetes":
+            st.markdown("""
+            **Insight**: Visualizes the relationship between age and diabetes status. Older individuals tend to have higher diabetes prevalence.
+            """)
+        elif selected_eda == "BMI vs Diabetes":
+            st.markdown("""
+            **Insight**: Shows how BMI relates to diabetes status. Higher BMI values correlate with increased diabetes risk.
+            """)
+        elif selected_eda == "Blood Glucose vs Diabetes":
+            st.markdown("""
+            **Insight**: Demonstrates the strong relationship between blood glucose levels and diabetes status.
+            """)
+        elif selected_eda == "HbA1c Level vs Diabetes":
+            st.markdown("""
+            **Insight**: HbA1c is a key indicator of long-term blood glucose control and diabetes status.
+            """)
+        elif selected_eda == "Feature Importance":
+            st.markdown("""
+            **Insight**: Shows which features were most important in the XGBoost model's predictions.
+            """)
+        elif selected_eda == "Confusion Matrix":
+            st.markdown("""
+            **Insight**: Illustrates the model's performance in terms of true positives, false positives, etc.
+            """)
+        elif selected_eda == "Pairplot of Features":
+            st.markdown("""
+            **Insight**: Displays pairwise relationships between multiple features in the dataset.
+            """)
+            
+    except Exception as e:
+        st.error(f"Error loading visualization: {str(e)}")
+    
+    # Add a section with key findings
+    st.markdown("""
+    ## Key Findings from EDA
+    
+    1. **Age and Diabetes Risk**: The data shows a clear increase in diabetes prevalence with age, particularly after 45 years.
+    
+    2. **BMI Impact**: Individuals with BMI > 30 have significantly higher diabetes rates compared to those with normal BMI.
+    
+    3. **Blood Glucose Levels**: As expected, higher blood glucose levels are strongly associated with diabetes.
+    
+    4. **HbA1c Importance**: HbA1c levels show a clear threshold effect around 5.7% (prediabetes) and 6.5% (diabetes).
+    
+    5. **Gender Differences**: The dataset shows some gender-based differences in diabetes prevalence and risk factor distributions.
+    
+    6. **Comorbid Conditions**: Presence of hypertension or heart disease is associated with higher diabetes rates.
+    """)
+    
+    # Add interactive correlation explorer
+    st.markdown("<h3 class='subheader'>Feature Correlation Explorer</h3>", unsafe_allow_html=True)
+    
+    st.markdown("""
+    The heatmap below shows correlations between different features in the dataset.
+    Stronger correlations (positive or negative) are indicated by darker colors.
+    """)
+    
+    # Display the correlation visualization
+    try:
+        st.image("EDA/Correlation with Diabetes.png", use_column_width=True)
+    except:
+        st.warning("Correlation visualization not available")
+    
+    st.markdown("""
+    ### Interpretation Guide:
+    
+    - **+1.0**: Perfect positive correlation (as one increases, the other increases)
+    - **0.0**: No correlation
+    - **-1.0**: Perfect negative correlation (as one increases, the other decreases)
+    
+    In diabetes risk assessment:
+    - Blood glucose and HbA1c show strong positive correlation with diabetes
+    - Age and BMI show moderate positive correlation
+    - Some features show little correlation with diabetes but may be important in combination with others
+    """)
 # Add footer with disclaimer
 st.markdown("<div class='footer'>", unsafe_allow_html=True)
 st.markdown("""
