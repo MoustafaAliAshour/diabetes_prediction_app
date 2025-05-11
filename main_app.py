@@ -614,11 +614,12 @@ with tab4:
     
     # Create a dropdown to select different visualizations
     eda_options = {
-        "Age Distribution": "ُAge Distribution.png",
+        "Pairplot of Features": "pairplot.png",
         "BMI Distribution": "BMI Distribution.png",
         "Gender Distribution": "Gender Distribution.png",
         "Diabetes Distribution": "Diabetes Distribution.png",
         "Smoking History Distribution": "Smoking History Distribution.png",
+        "Age Distribution": "ُAge Distribution.png",
         "Age vs Diabetes": "Age vs Diabetes.png",
         "BMI vs Diabetes": "BMI vs Diabetes.png",
         "Blood Glucose vs Diabetes": "Blood Glucose Level vs Diabetes.png",
@@ -630,7 +631,6 @@ with tab4:
         "Age vs BMI": "Age vs BMI.png",
         "Correlation Matrix Heatmap": "Correlation Matrix Heatmap.png",
         "Correlation with Diabetes": "Correlation with Diabetes.png",
-        "Pairplot of Features": "pairplot.png",
         "Feature Importance": "xgb_feature_importances.png",
         "Confusion Matrix": "confusion_matrix.png"
     }
