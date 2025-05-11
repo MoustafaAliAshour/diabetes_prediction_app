@@ -135,48 +135,26 @@ with tab1:
                 risk_class = "risk-high"
             
 
-# Main content area for results
-if predict_btn:
-    with st.spinner("Analyzing your health data..."):
-        time.sleep(1)  # Simulate processing time
+            # Section Header
+            st.markdown("<h2 class='subheader'>🩺 Your Diabetes Risk Assessment</h2>", unsafe_allow_html=True)
 
-        # Preprocess the input
-        processed_input = preprocess_input(input_data, preprocessor)
+            # Result card
+            st.markdown(f"<div class='card {risk_class}'>", unsafe_allow_html=True)
 
-        # Get prediction
-        prediction, prediction_proba = predict_diabetes(model, processed_input)
-        diabetes_probability = prediction_proba[1]
-
-        # Determine risk class and label
-        if diabetes_probability < 0.3:
-            risk_class = "risk-low"
-            risk_level = "Low"
-        elif diabetes_probability < 0.7:
-            risk_class = "risk-moderate"
-            risk_level = "Medium"
-        else:
-            risk_class = "risk-high"
-            risk_level = "High"
-
-        # Section Header
-        st.markdown("<h2 class='subheader'>🩺 Your Diabetes Risk Assessment</h2>", unsafe_allow_html=True)
-
-        # Result card
-        st.markdown(f"<div class='card {risk_class}'>", unsafe_allow_html=True)
-
-        # Prediction message
-        if prediction == 1:
-            st.markdown("<p class='result-header diabetes-positive'>⚠️ Higher Risk of Diabetes Detected</p>", unsafe_allow_html=True)
-            st.markdown("Based on your input, our model indicates a **higher risk** of developing diabetes. This is **not a diagnosis**—please consult a healthcare provider for further evaluation.")
-        else:
-            st.markdown("<p class='result-header diabetes-negative'>✅ Lower Risk of Diabetes Detected</p>", unsafe_allow_html=True)
-            st.markdown("Your data suggests a **lower risk** of diabetes. Keep up your healthy habits!")
+            # Prediction message
+            if prediction == 1:
+                st.markdown("<p class='result-header diabetes-positive'>⚠️ Higher Risk of Diabetes Detected</p>", unsafe_allow_html=True)
+                st.markdown("Based on your input, our model indicates a **higher risk** of developing diabetes. This is **not a diagnosis**—please consult a healthcare provider for further evaluation.")
+            else:
+                st.markdown("<p class='result-header diabetes-negative'>✅ Lower Risk of Diabetes Detected</p>", unsafe_allow_html=True)
+                st.markdown("Your data suggests a **lower risk** of diabetes. Keep up your healthy habits!")
 
             # Display risk factors
             risk_factors = display_risk_factors(input_data)
             
             if risk_factors:
                 st.markdown("<h3 class='subheader'>Identified Risk Factors</h3>", unsafe_allow_html=True)
+                st.markdown("<div class='card'>", unsafe_allow_html=True)
                 for factor in risk_factors:
                     st.markdown(f"<div class='risk-factor-item'>{factor}</div>", unsafe_allow_html=True)
                 st.markdown("</div>", unsafe_allow_html=True)
@@ -185,7 +163,7 @@ if predict_btn:
             recommendations = generate_health_recommendations(prediction, risk_factors)
             
             st.markdown("<h3 class='subheader'>Health Recommendations</h3>", unsafe_allow_html=True)
-            
+            st.markdown("<div class='card'>", unsafe_allow_html=True)
             for i, recommendation in enumerate(recommendations):
                 st.markdown(f"<p class='recommendation-item'>{recommendation}</p>", unsafe_allow_html=True)
             st.markdown("</div>", unsafe_allow_html=True)
