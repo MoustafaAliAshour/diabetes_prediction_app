@@ -8,7 +8,7 @@ import base64
 import time
 from utils import (
     load_model_and_preprocessor, preprocess_input, predict_diabetes,
-    create_gauge_chart, display_feature_importance, display_risk_factors,
+    create_gauge_chart, display_feature_importance,
     generate_health_recommendations, recategorize_smoking
 )
 
