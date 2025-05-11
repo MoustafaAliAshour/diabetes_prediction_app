@@ -558,7 +558,7 @@ with tab3:
             else:
                 st.markdown("<p>All health metrics are within normal ranges.</p>", unsafe_allow_html=True)
 
-                
+
 with tab4:
     st.markdown("<h2 class='subheader'>Exploratory Data Analysis</h2>", unsafe_allow_html=True)
     
@@ -596,7 +596,7 @@ with tab4:
     # Display the selected visualization
     try:
         image_path = f"EDA/{eda_options[selected_eda]}"
-        st.image(image_path, use_column_width=True)
+        st.image(image_path, use_container_width=True)  # Updated parameter here
         
         # Add descriptions for each visualization
         if selected_eda == "Age Distribution":
@@ -674,7 +674,7 @@ with tab4:
     
     # Display the correlation visualization
     try:
-        st.image("EDA/Correlation with Diabetes.png", use_column_width=True)
+        st.image("EDA/Correlation with Diabetes.png", use_container_width=True)  # Updated parameter here
     except:
         st.warning("Correlation visualization not available")
     
@@ -690,7 +690,7 @@ with tab4:
     - Age and BMI show moderate positive correlation
     - Some features show little correlation with diabetes but may be important in combination with others
     """)
-# Add footer with disclaimer
+# Add footer 
 st.markdown("<div class='footer'>", unsafe_allow_html=True)
 st.markdown("""
 This project, developed under the Digital Egypt Pioneers Initiative (DEPI), is centered around predictive modeling in healthcare—specifically, 
