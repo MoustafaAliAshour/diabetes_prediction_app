@@ -1,0 +1,114 @@
+/* Main page styling */
+.main-header {
+    color: #1E88E5;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f2f6;
+}
+
+.subheader {
+    color: #424242;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Form styling */
+.stButton > button {
+    width: 100%;
+    background-color: #1E88E5;
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    border: none;
+    margin-top: 1rem;
+}
+
+.stButton > button:hover {
+    background-color: #1565C0;
+}
+
+/* Card styling */
+.card {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #f8f9fa;
+    margin-bottom: 1rem;
+    border-left: 4px solid #1E88E5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.risk-high {
+    background-color: #ffebee;
+    border-left: 4px solid #d32f2f;
+}
+
+.risk-moderate {
+    background-color: #fff8e1;
+    border-left: 4px solid #ffa000;
+}
+
+.risk-low {
+    background-color: #e8f5e9;
+    border-left: 4px solid #43a047;
+}
+
+/* Result styling */
+.result-header {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.diabetes-positive {
+    color: #d32f2f;
+}
+
+.diabetes-negative {
+    color: #2e7d32;
+}
+
+/* Recommendations styling */
+.recommendation-item {
+    margin-bottom: 0.7rem;
+    padding-left: 1rem;
+    border-left: 2px solid #1E88E5;
+}
+
+/* Risk factor styling */
+.risk-factor-item {
+    padding: 0.4rem 0.8rem;
+    margin: 0.25rem;
+    border-radius: 0.3rem;
+    background-color: #e3f2fd;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f2f6;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #9e9e9e;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    .main-header {
+        font-size: 1.5rem;
+    }
+    
+    .subheader {
+        font-size: 1.2rem;
+    }
+    
+    .card {
+        padding: 1rem;
+    }
+}
