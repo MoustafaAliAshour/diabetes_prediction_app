@@ -155,15 +155,6 @@ with tab1:
                 </div>
                 """, unsafe_allow_html=True)
 
-            # Display risk factors
-            risk_factors = display_risk_factors(input_data)
-            
-            if risk_factors:
-                st.markdown("<h3 class='subheader'>Identified Risk Factors</h3>", unsafe_allow_html=True)
-                for factor in risk_factors:
-                    st.markdown(f"<div class='risk-factor-item'>{factor}</div>", unsafe_allow_html=True)
-               
-            
             # Generate and display health recommendations
             recommendations = generate_health_recommendations(prediction, risk_factors)
             
@@ -414,10 +405,10 @@ with tab3:
     
     The XGBoost model was trained on a dataset of health records and evaluated using various metrics:
     
-    - **Accuracy**: 95.8%
-    - **Precision**: 94.3%
-    - **Recall**: 93.7%
-    - **F1 Score**: 94.0%
+    - **Accuracy**: 97.61%
+    - **Precision**: 96%
+    - **Recall**: 96%
+    - **F1 Score**: 98%
     
     ### Data Preprocessing
     
@@ -506,7 +497,6 @@ with tab3:
             col1, col2 = st.columns(2)
             
             with col1:
-                st.markdown("<div class='card'>", unsafe_allow_html=True)
                 st.markdown("<p class='result-header'>Baseline Healthy Profile</p>", unsafe_allow_html=True)
                 st.markdown(f"""
                 - Age: 45
@@ -561,7 +551,6 @@ with tab3:
                 factors.append(("Advanced age", f"+{impact:.1f}%", "medium"))
             
             if factors:
-                st.markdown("<div class='card'>", unsafe_allow_html=True)
                 st.markdown("<p>Key factors affecting this prediction:</p>", unsafe_allow_html=True)
                 for factor, impact, level in factors:
                     color = "red" if level == "high" else "orange" if level == "medium" else "blue"
@@ -573,8 +562,9 @@ with tab3:
 # Add footer with disclaimer
 st.markdown("<div class='footer'>", unsafe_allow_html=True)
 st.markdown("""
-**Disclaimer**: This application is for educational and informational purposes only and is not intended as a substitute for professional medical advice, diagnosis, or treatment. 
-Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+This project, developed under the Digital Egypt Pioneers Initiative (DEPI), is centered around predictive modeling in healthcare—specifically, 
+            the classification of diabetes risk for individuals. Diabetes remains one of the most prevalent and debilitating diseases worldwide, 
+            and early risk detection, combined with personalized health recommendations, can significantly improve patient management and outcomes. 
+            The aim of this project is to harness the power of data science to support healthcare professionals in making more informed decisions through 
+            data-driven insights, ultimately helping individuals at risk of diabetes to better manage their health.
 """)
-st.markdown("© 2025 Diabetes Risk Assessment Tool", unsafe_allow_html=True)
-st.markdown("</div>", unsafe_allow_html=True)
