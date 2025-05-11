@@ -43,63 +43,47 @@ Enter your health information below to get a personalized risk assessment.
 # Create tabs
 tab1, tab2, tab3, tab4 = st.tabs(["Risk Assessment", "About Diabetes", "Model Insights", "Exploratory Data Analysis"])
 
-with tab1:
+with tab1: 
     # Sidebar for inputs
     st.sidebar.markdown("<h2 class='subheader'>Enter Your Health Information</h2>", unsafe_allow_html=True)
-    
-    # Age input
-    age = st.sidebar.slider("Age", 18, 100, 45, help="Select your age")
-    
-    # Gender selection
-    gender = st.sidebar.selectbox("Gender", ["Male", "Female"], index=0, help="Select your gender")
-    
-    # BMI input
-    bmi = st.sidebar.slider("BMI", 10.0, 50.0, 25.0, 0.01, help="Body Mass Index (kg/m²)")
-    
-    # Calculate BMI option
-    if st.sidebar.checkbox("Calculate BMI", help="Calculate BMI from height and weight"):
-        height_cm = st.sidebar.number_input("Height (cm)", min_value=100, max_value=250, value=170, step=1, help="Your height in centimeters")
-        weight_kg = st.sidebar.number_input("Weight (kg)", min_value=30, max_value=300, value=70, step=1, help="Your weight in kilograms")
-        
-        # Calculate BMI when both values are provided
+
+    age = st.sidebar.slider("Age", 18, 100, 45)
+    gender = st.sidebar.selectbox("Gender", ["Male", "Female"])
+    bmi = st.sidebar.slider("BMI", 10.0, 50.0, 25.0, 0.01)
+
+    if st.sidebar.checkbox("Calculate BMI"):
+        height_cm = st.sidebar.number_input("Height (cm)", min_value=100, max_value=250, value=170)
+        weight_kg = st.sidebar.number_input("Weight (kg)", min_value=30, max_value=300, value=70)
         if height_cm and weight_kg:
             height_m = height_cm / 100
             calculated_bmi = weight_kg / (height_m ** 2)
             bmi = round(calculated_bmi, 1)
             st.sidebar.write(f"Calculated BMI: **{bmi}**")
-    
-    # HbA1c level
-    hba1c = st.sidebar.slider("HbA1c Level (%)", 3.0, 9.0, 5.5, 0.1, help="Glycated hemoglobin level (%) - Normal range is below 5.7%")
-    
-    # Blood glucose level
-    blood_glucose = st.sidebar.slider("Blood Glucose Level (mg/dL)", 70, 300, 110, 1, help="Fasting blood glucose level in mg/dL - Normal range is 70-99 mg/dL")
-    
-    # Hypertension and heart disease
+
+    hba1c = st.sidebar.slider("HbA1c Level (%)", 3.0, 9.0, 5.5, 0.1)
+    blood_glucose = st.sidebar.slider("Blood Glucose Level (mg/dL)", 70, 300, 110, 1)
+
     col1, col2 = st.sidebar.columns(2)
     with col1:
-        hypertension = st.selectbox("Hypertension", ["No", "Yes"], help="Do you have hypertension?")
+        hypertension = st.selectbox("Hypertension", ["No", "Yes"])
         hypertension = 1 if hypertension == "Yes" else 0
-    
+
     with col2:
-        heart_disease = st.selectbox("Heart Disease", ["No", "Yes"], help="Do you have heart disease?")
+        heart_disease = st.selectbox("Heart Disease", ["No", "Yes"])
         heart_disease = 1 if heart_disease == "Yes" else 0
-    
-    # Smoking history
+
     smoking_options = {
         "Never": "never",
         "Current smoker": "current",
         "Former smoker": "former",
         "No information": "No Info"
     }
-    
-    smoking_selected = st.sidebar.selectbox("Smoking History", list(smoking_options.keys()), index=0, help="Select your smoking status")
-    smoking_history = smoking_options[smoking_selected]
-    smoking_history = recategorize_smoking(smoking_history)
-    
-    # Predict button
+
+    smoking_selected = st.sidebar.selectbox("Smoking History", list(smoking_options.keys()))
+    smoking_history = recategorize_smoking(smoking_options[smoking_selected])
+
     predict_btn = st.sidebar.button("Predict Diabetes Risk")
-    
-    # Create a dictionary with the input data
+
     input_data = {
         'age': age,
         'gender': gender,
@@ -110,22 +94,14 @@ with tab1:
         'heart_disease': heart_disease,
         'smoking_history': smoking_history
     }
-    
-    # Main content area for results
-    if predict_btn:
-        # Show spinner while processing
-        with st.spinner("Analyzing your health data..."):
-            time.sleep(1)  # Simulate processing time for better UX
-            
-            # Preprocess the input
-            processed_input = preprocess_input(input_data, preprocessor)
-            
-            # Get prediction
-            prediction, prediction_proba = predict_diabetes(model, processed_input)
-            
 
-            
-            # Determine risk level class based on probability
+    if predict_btn:
+        with st.spinner("Analyzing your health data..."):
+            time.sleep(1)
+
+            processed_input = preprocess_input(input_data, preprocessor)
+            prediction, prediction_proba = predict_diabetes(model, processed_input)
+
             diabetes_probability = prediction_proba[1]
             if diabetes_probability < 0.3:
                 risk_class = "risk-low"
@@ -133,38 +109,32 @@ with tab1:
                 risk_class = "risk-moderate"
             else:
                 risk_class = "risk-high"
-            
 
-            # Section Header
             st.markdown("<h2 class='subheader'>🩺 Your Diabetes Risk Assessment</h2>", unsafe_allow_html=True)
 
-    
-
             if prediction == 1:
-                 st.markdown("""
+                st.markdown("""
                 <div style='text-align: center;'>
-                     <p style="font-size: 4.5em;" class='result-header diabetes-positive'>⚠️ Higher Risk of Diabetes Detected</p>
+                    <p style="font-size: 4.5em;" class='result-header diabetes-positive'>⚠️ Higher Risk of Diabetes Detected</p>
                     <p>Based on your input, our model indicates a <strong>higher risk</strong> of developing diabetes.<br>This is <strong>not a diagnosis</strong>—please consult a healthcare provider for further evaluation.</p>
                 </div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown("""
                 <div style='text-align: center;'>
-                  <p style="font-size: 4.5em;" class='result-header diabetes-negative'>✅ Lower Risk of Diabetes Detected</p>
+                    <p style="font-size: 4.5em;" class='result-header diabetes-negative'>✅ Lower Risk of Diabetes Detected</p>
                     <p>Your data suggests a <strong>lower risk</strong> of diabetes.<br>Keep up your healthy habits!</p>
                 </div>
                 """, unsafe_allow_html=True)
 
-            # Generate and display health recommendations
+            # ✅ Generate recommendations without passing `risk_factors`
             recommendations = generate_health_recommendations(prediction)
-            
+
             st.markdown("<h3 class='subheader'>Health Recommendations</h3>", unsafe_allow_html=True)
-            for i, recommendation in enumerate(recommendations):
-                st.markdown(f"<p class='recommendation-item'>{recommendation}</p>", unsafe_allow_html=True)
-            st.markdown("</div>", unsafe_allow_html=True)
-    
+            for rec in recommendations:
+                st.markdown(f"<p class='recommendation-item'>{rec}</p>", unsafe_allow_html=True)
+
     else:
-        # Default content when the user hasn't pressed the predict button
         st.info("Enter your health information in the sidebar and click 'Predict Diabetes Risk' to get your assessment.")
         
         # Sample visualization to make the page more engaging
