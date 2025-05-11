@@ -148,129 +148,129 @@ with tab1:
     else:
         st.info("Enter your health information in the sidebar and click 'Predict Diabetes Risk' to get your assessment.")
         
-        # Sample visualization to make the page more engaging
-        st.markdown("<h3 class='subheader'>Understanding Your Input Factors</h3>", unsafe_allow_html=True)
+    # Sample visualization to make the page more engaging
+    st.markdown("<h3 class='subheader'>Understanding Your Input Factors</h3>", unsafe_allow_html=True)
         
         # Create sample visualizations to explain the factors
-        col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
         
-        with col1:
-            # BMI categories explanation
-            bmi_categories = pd.DataFrame({
-                'Category': ['Underweight', 'Normal weight', 'Overweight', 'Obesity Class I', 'Obesity Class II', 'Obesity Class III'],
-                'BMI Range': ['<18.5', '18.5-24.9', '25-29.9', '30-34.9', '35-39.9', '≥40'],
-                'Risk Level': [2, 1, 2, 3, 4, 5]
-            })
-            
-            fig = px.bar(bmi_categories, x='Category', y='Risk Level', 
-                        color='Risk Level', color_continuous_scale='Reds',
-                        title='Diabetes Risk by BMI Category',
-                        labels={'Risk Level': 'Relative Risk'})
-            
-            # Add an indicator for the user's BMI
-            if 18.5 <= bmi < 25:
-                bmi_category = 'Normal weight'
-            elif 25 <= bmi < 30:
-                bmi_category = 'Overweight'
-            elif 30 <= bmi < 35:
-                bmi_category = 'Obesity Class I'
-            elif 35 <= bmi < 40:
-                bmi_category = 'Obesity Class II'
-            elif bmi >= 40:
-                bmi_category = 'Obesity Class III'
-            else:
-                bmi_category = 'Underweight'
-            
-            # Highlight the user's category
-            fig.add_annotation(
-                x=bmi_category,
-                y=bmi_categories[bmi_categories['Category'] == bmi_category]['Risk Level'].values[0],
-                text="You",
-                showarrow=True,
-                arrowhead=1,
-                ax=0,
-                ay=-40
-            )
-            
-            st.plotly_chart(fig, use_container_width=True)
-        
-        with col2:
-            # Blood glucose categories
-            glucose_categories = pd.DataFrame({
-                'Category': ['Normal', 'Prediabetes', 'Diabetes'],
-                'Range (mg/dL)': ['70-99', '100-125', '≥126'],
-                'Risk Level': [1, 2, 3]
-            })
-            
-            fig = px.bar(glucose_categories, x='Category', y='Risk Level',
-                        color='Risk Level', color_continuous_scale='Reds',
-                        title='Risk Level by Blood Glucose Category',
-                        labels={'Risk Level': 'Relative Risk'})
-            
-            # Add an indicator for the user's blood glucose
-            if blood_glucose < 100:
-                glucose_category = 'Normal'
-            elif 100 <= blood_glucose < 126:
-                glucose_category = 'Prediabetes'
-            else:
-                glucose_category = 'Diabetes'
-            
-            # Highlight the user's category
-            fig.add_annotation(
-                x=glucose_category,
-                y=glucose_categories[glucose_categories['Category'] == glucose_category]['Risk Level'].values[0],
-                text="You",
-                showarrow=True,
-                arrowhead=1,
-                ax=0,
-                ay=-40
-            )
-            
-            st.plotly_chart(fig, use_container_width=True)
-        
-        # Add HbA1c explanation
-        st.markdown("<h3 class='subheader'>HbA1c Levels and Diabetes</h3>", unsafe_allow_html=True)
-        hba1c_data = pd.DataFrame({
-            'Category': ['Normal', 'Prediabetes', 'Diabetes'],
-            'HbA1c Range (%)': ['Below 5.7', '5.7 to 6.4', '6.5 or higher'],
-            'Value': [5.5, 6.0, 7.0]
+    with col1:
+        # BMI categories explanation
+        bmi_categories = pd.DataFrame({
+            'Category': ['Underweight', 'Normal weight', 'Overweight', 'Obesity Class I', 'Obesity Class II', 'Obesity Class III'],
+            'BMI Range': ['<18.5', '18.5-24.9', '25-29.9', '30-34.9', '35-39.9', '≥40'],
+            'Risk Level': [2, 1, 2, 3, 4, 5]
         })
-        
-        fig = px.bar(hba1c_data, x='Category', y='Value', 
-                    color='Value', color_continuous_scale='Reds',
-                    title='HbA1c Categories',
-                    labels={'Value': 'HbA1c (%)'})
-        
-        # Add an indicator for the user's HbA1c
-        if hba1c < 5.7:
-            hba1c_category = 'Normal'
-        elif 5.7 <= hba1c < 6.5:
-            hba1c_category = 'Prediabetes'
+            
+        fig = px.bar(bmi_categories, x='Category', y='Risk Level', 
+                    color='Risk Level', color_continuous_scale='Reds',
+                    title='Diabetes Risk by BMI Category',
+                    labels={'Risk Level': 'Relative Risk'})
+            
+        # Add an indicator for the user's BMI
+        if 18.5 <= bmi < 25:
+            bmi_category = 'Normal weight'
+        elif 25 <= bmi < 30:
+            bmi_category = 'Overweight'
+        elif 30 <= bmi < 35:
+            bmi_category = 'Obesity Class I'
+        elif 35 <= bmi < 40:
+            bmi_category = 'Obesity Class II'
+        elif bmi >= 40:
+            bmi_category = 'Obesity Class III'
         else:
-            hba1c_category = 'Diabetes'
-        
+            bmi_category = 'Underweight'
+            
         # Highlight the user's category
         fig.add_annotation(
-            x=hba1c_category,
-            y=hba1c,
-            text="Your HbA1c",
+            x=bmi_category,
+            y=bmi_categories[bmi_categories['Category'] == bmi_category]['Risk Level'].values[0],
+            text="You",
             showarrow=True,
             arrowhead=1,
             ax=0,
             ay=-40
         )
-        
-        # Add reference lines
-        fig.add_shape(
-            type="line", line_color="green", line_width=2, line_dash="dash",
-            y0=5.7, y1=5.7, x0=-0.5, x1=2.5
-        )
-        fig.add_shape(
-            type="line", line_color="red", line_width=2, line_dash="dash",
-            y0=6.5, y1=6.5, x0=-0.5, x1=2.5
-        )
-        
+            
         st.plotly_chart(fig, use_container_width=True)
+        
+    with col2:
+        # Blood glucose categories
+        glucose_categories = pd.DataFrame({
+            'Category': ['Normal', 'Prediabetes', 'Diabetes'],
+            'Range (mg/dL)': ['70-99', '100-125', '≥126'],
+            'Risk Level': [1, 2, 3]
+        })
+            
+        fig = px.bar(glucose_categories, x='Category', y='Risk Level',
+                    color='Risk Level', color_continuous_scale='Reds',
+                    title='Risk Level by Blood Glucose Category',
+                    labels={'Risk Level': 'Relative Risk'})
+            
+        # Add an indicator for the user's blood glucose
+        if blood_glucose < 100:
+            glucose_category = 'Normal'
+        elif 100 <= blood_glucose < 126:
+            glucose_category = 'Prediabetes'
+        else:
+            glucose_category = 'Diabetes'
+           
+        # Highlight the user's category
+        fig.add_annotation(
+            x=glucose_category,
+            y=glucose_categories[glucose_categories['Category'] == glucose_category]['Risk Level'].values[0],
+            text="You",
+            showarrow=True,
+            arrowhead=1,
+            ax=0,
+            ay=-40
+            )
+            
+        st.plotly_chart(fig, use_container_width=True)
+        
+    # Add HbA1c explanation
+    st.markdown("<h3 class='subheader'>HbA1c Levels and Diabetes</h3>", unsafe_allow_html=True)
+    hba1c_data = pd.DataFrame({
+        'Category': ['Normal', 'Prediabetes', 'Diabetes'],
+        'HbA1c Range (%)': ['Below 5.7', '5.7 to 6.4', '6.5 or higher'],
+        'Value': [5.5, 6.0, 7.0]
+    })
+        
+    fig = px.bar(hba1c_data, x='Category', y='Value', 
+                color='Value', color_continuous_scale='Reds',
+                title='HbA1c Categories',
+                labels={'Value': 'HbA1c (%)'})
+        
+        # Add an indicator for the user's HbA1c
+    if hba1c < 5.7:
+        hba1c_category = 'Normal'
+    elif 5.7 <= hba1c < 6.5:
+        hba1c_category = 'Prediabetes'
+    else:
+        hba1c_category = 'Diabetes'
+        
+    # Highlight the user's category
+    fig.add_annotation(
+        x=hba1c_category,
+        y=hba1c,
+        text="Your HbA1c",
+        showarrow=True,
+        arrowhead=1,
+        ax=0,
+        ay=-40
+    )
+        
+     # Add reference lines
+    fig.add_shape(
+         type="line", line_color="green", line_width=2, line_dash="dash",
+        y0=5.7, y1=5.7, x0=-0.5, x1=2.5
+    )
+    fig.add_shape(
+        type="line", line_color="red", line_width=2, line_dash="dash",
+        y0=6.5, y1=6.5, x0=-0.5, x1=2.5
+    )
+        
+    st.plotly_chart(fig, use_container_width=True)    
 
 with tab2:
     st.markdown("<h2 class='subheader'>About Diabetes</h2>", unsafe_allow_html=True)
