@@ -7,9 +7,8 @@ import io
 import base64
 import time
 from utils import (
-load_model_and_preprocessor, preprocess_input, predict_diabetes,
-    create_gauge_chart, display_feature_importance, display_risk_factors,
-    generate_health_recommendations, recategorize_smoking
+load_model_and_preprocessor, preprocess_input, predict_diabetes, display_feature_importance, 
+display_risk_factors, generate_health_recommendations, recategorize_smoking
 )
 
 # Page configuration
@@ -47,7 +46,7 @@ with tab1:
     # Sidebar for inputs
     st.sidebar.markdown("<h2 class='subheader'>Enter Your Health Information</h2>", unsafe_allow_html=True)
 
-    age = st.sidebar.slider("Age", 18, 100, 45)
+    age = st.sidebar.slider("Age", 0, 100, 45)
     gender = st.sidebar.selectbox("Gender", ["Male", "Female"])
     bmi = st.sidebar.slider("BMI", 10.0, 50.0, 25.0, 0.01)
 
@@ -411,7 +410,6 @@ with tab3:
     Always consult with healthcare professionals for proper diagnosis and treatment decisions.
     """)
     
-    # Add model interpretation example
     st.markdown("<h3 class='subheader'>Understanding the Predictions</h3>", unsafe_allow_html=True)
     
     st.markdown("""
