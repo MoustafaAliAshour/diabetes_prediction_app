@@ -15,6 +15,7 @@
 * **Mahmoud Elsanhouri**
 * **Seif Mountaser**
 * **Abdelrahman Ata**
+* **Mohammed Elzayat**
   
 [🔗 Streamlit App](https://diabetespredictionapp-qhgxj9apfkxkxvxzjvvye8.streamlit.app)
 
