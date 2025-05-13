@@ -99,15 +99,8 @@ with tab1:
             time.sleep(1)
 
             processed_input = preprocess_input(input_data, preprocessor)
-            prediction, prediction_proba = predict_diabetes(model, processed_input)
+            prediction = predict_diabetes(model, processed_input)
 
-            diabetes_probability = prediction_proba[1]
-            if diabetes_probability < 0.3:
-                risk_class = "risk-low"
-            elif diabetes_probability < 0.7:
-                risk_class = "risk-moderate"
-            else:
-                risk_class = "risk-high"
 
             st.markdown("<h2 class='subheader'>🩺 Your Diabetes Risk Assessment</h2>", unsafe_allow_html=True)
 

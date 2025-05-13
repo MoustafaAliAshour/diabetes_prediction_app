@@ -1,14 +1,10 @@
 import joblib
 import pandas as pd
-import numpy as np
 import streamlit as st
-import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 
 def load_model_and_preprocessor():
-    """Load the saved XGBoost model and preprocessor."""
     try:
         model = joblib.load('models/xgboost_diabetes_model.pkl')
         preprocessor = joblib.load('models/preprocessor_pipeline.pkl')
@@ -40,7 +36,7 @@ def predict_diabetes(model, processed_data):
     """Make a prediction using the preprocessed data."""
     prediction = model.predict(processed_data)
     prediction_proba = model.predict_proba(processed_data)
-    return prediction[0], prediction_proba[0]
+    return prediction[0]
 
 def create_gauge_chart(probability):
     """Create a gauge chart to visualize the prediction probability."""
