@@ -35,38 +35,11 @@ def preprocess_input(data, preprocessor):
 def predict_diabetes(model, processed_data):
     """Make a prediction using the preprocessed data."""
     prediction = model.predict(processed_data)
-    prediction_proba = model.predict_proba(processed_data)
     return prediction[0]
 
-def create_gauge_chart(probability):
-    """Create a gauge chart to visualize the prediction probability."""
-    fig = go.Figure(go.Indicator(
-        mode="gauge+number",
-        value=probability * 100,
-        domain={'x': [0, 1], 'y': [0, 1]},
-        title={'text': "Risk of Diabetes", 'font': {'size': 24}},
-        gauge={
-            'axis': {'range': [0, 100], 'tickwidth': 1, 'tickcolor': "darkblue"},
-            'bar': {'color': "darkblue"},
-            'bgcolor': "white",
-            'borderwidth': 2,
-            'bordercolor': "gray",
-            'steps': [
-                {'range': [0, 30], 'color': 'green'},
-                {'range': [30, 70], 'color': 'yellow'},
-                {'range': [70, 100], 'color': 'red'}],
-            'threshold': {
-                'line': {'color': "red", 'width': 4},
-                'thickness': 0.75,
-                'value': probability * 100}}))
-    
-    fig.update_layout(height=300)
-    return fig
 
 def display_feature_importance(model):
     """Display feature importance from the model."""
-    # Get feature importances and display
-    # Note: You would need to have the feature names in the correct order
     numeric_features = ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level', 'hypertension', 'heart_disease']
     onehot_columns = ['gender_Female', 'gender_Male', 
                       'smoking_history_current', 'smoking_history_non-smoker', 'smoking_history_past_smoker']
