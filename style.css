@@ -31,26 +31,11 @@
     background-color: #1565C0;
 }
 
-/* Card styling */
-.card {
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    background-color: #f8f9fa;
-    margin-bottom: 1rem;
-    border-left: 4px solid #1E88E5;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
 .risk-high {
     background-color: #ffebee;
     border-left: 4px solid #d32f2f;
 }
-
-.risk-moderate {
-    background-color: #fff8e1;
-    border-left: 4px solid #ffa000;
-}
-
 .risk-low {
     background-color: #e8f5e9;
     border-left: 4px solid #43a047;
@@ -105,9 +90,5 @@
     
     .subheader {
         font-size: 1.2rem;
-    }
-    
-    .card {
-        padding: 1rem;
     }
 }
