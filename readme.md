@@ -1,145 +1,218 @@
-# Diabetes Risk Prediction App
+## 🧠 Diabetes Risk Prediction Using Machine Learning
 
-An interactive Streamlit application for diabetes risk assessment based on health metrics and XGBoost machine learning model.
+![Header](./assets/diabetes_header.png)
 
-![Diabetes Risk Prediction App](assets/diabetes_header.png)
+* **Initiative**: Digital Egypt Pioneers Initiative (DEPI)
+* **Track**: Data Science
+* **Group Code**: ALX2 AIS4 S10 Data Scientist
+* **Project Supervisor**: Mahmoud Khorshed
+* **Organization**: Ministry of Communications and Information Technology (MCIT)
 
-## Features
+### Team Members
 
-- Interactive health data input with intuitive UI
-- Real-time diabetes risk prediction
-- Personalized risk assessment with visual indicators
-- Health recommendations based on identified risk factors
-- Educational content about diabetes
-- Model insights and feature importance visualization
-- Scenario explorer to understand risk factors
+* **Moustafa Rezk**
+* **Moustafa Ashour**
+* **Mahmoud Elsanhouri**
+* **Seif Mountaser**
+* **Abdelrahman Ata**
+  
+[🔗 Streamlit App](https://diabetespredictionapp-qhgxj9apfkxkxvxzjvvye8.streamlit.app)
 
-## Getting Started
+[📂 Project Repo](https://github.com/rezk1834/diabetes_prediction_app)
 
-### Prerequisites
+---
 
-- Python 3.8 or higher
-- pip (Python package installer)
+### 📌 Overview
 
-### Installation
+This project leverages machine learning to assess diabetes risk based on individual health indicators. By deploying an XGBoost classifier within a full data science pipeline, the model achieves near-clinical accuracy while remaining user-friendly through a Streamlit interface.
 
-1. Clone this repository:
-   ```
-   git clone https://github.com/rezk1834/diabetes-prediction-app.git
-   cd diabetes-prediction-app
-   ```
+---
 
-2. Run the setup script:
-   ```
-   bash run.sh
-   ```
+### 🚀 Objective
 
-   This script will:
-   - Create a virtual environment
-   - Install the required dependencies
-   - Start the Streamlit application
+To build a predictive tool for diabetes diagnosis using a machine learning pipeline trained on patient health records. This tool supports early detection and informed clinical decision-making.
 
-   Alternatively, you can set up manually:
+---
 
-   ```
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   streamlit run app.py
-   ```
+### 🧠 Technologies & Libraries
 
-3. The application will open in your default web browser at `http://localhost:8501`
+- **Python 3**
+- **Pandas, NumPy** – Data manipulation
+- **Scikit-learn, XGBoost** – ML models & evaluation
+- **Matplotlib, Seaborn** – Visualizations
+- **Streamlit** – Web application deployment
 
-### Model Files
+---
 
-The application requires two model files in the `models/` directory:
-- `xgboost_diabetes_model.pkl` - The trained XGBoost model
-- `preprocessor_pipeline.pkl` - The preprocessing pipeline
 
-These files are generated from the Jupyter notebook analysis and should be placed in the models directory before running the application.
+### 📊 Dataset Overview
 
-## Project Structure
+* **Source:** [Kaggle - Diabetes Prediction Dataset](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset)
+* **Size:** 96,128 patient records
+* **Target Variable:** Diabetes status (0 = No, 1 = Yes)
+
+#### Key Features:
+
+| Feature             | Type        | Description                       |
+| ------------------- | ----------- | --------------------------------- |
+| Age                 | Numerical   | Age in years (0.08–80)            |
+| Gender              | Categorical | Male, Female                      |
+| BMI                 | Numerical   | Body Mass Index (10–95.69)        |
+| HbA1c Level         | Numerical   | Glycated hemoglobin % (3.5–9.0)   |
+| Blood Glucose Level | Numerical   | Fasting glucose in mg/dL (80–300) |
+| Hypertension        | Binary      | 0 = No, 1 = Yes                   |
+| Heart Disease       | Binary      | 0 = No, 1 = Yes                   |
+| Smoking History     | Categorical | never, current, former, No Info   |
+
+---
+
+### 🧹 Data Preprocessing
+
+* **Duplicates Removed:** 3,854 rows (\~4%)
+
+* **Missing Values:** None
+
+* **Outlier Handling:** All values within plausible medical ranges
+
+* **Categorical Recoding:**
+
+  * Consolidated smoking history into 3 buckets (never, current/former, unknown)
+  * Removed rare category “Other” from gender
+
+* **Encoding:** One-Hot Encoding applied to categorical variables
+
+* **Scaling:** StandardScaler applied to numerical features
+
+* **Imbalance Treatment:** SMOTE used to oversample minority class
+
+---
+
+### 📈 Exploratory Data Analysis
+
+EDA helped uncover critical patterns:
+
+* **Age, BMI, and Blood Glucose** show strong right-skewed distributions
+* **Diabetes prevalence** is skewed, necessitating class balance treatment
+* **HbA1c and Glucose levels** were most predictive of diabetes status
+* **Smoking history** showed nuanced patterns—"current/former" had higher prevalence than "never" or "unknown"
+
+📷 *Examples of visualizations in the `/EDA/` folder include:*
+
+* Age and BMI distributions
+* Diabetes by glucose level
+* Gender and smoking distributions
+* Feature correlations
+
+---
+
+### 🛠️ Feature Engineering
+
+* Created interaction terms between BMI, HbA1c, and glucose
+* Assessed feature correlation and variance
+* XGBoost feature importances confirmed:
+  `Glucose > HbA1c > Age > BMI > Hypertension > Smoking > Heart Disease`
+
+---
+
+### 🤖 Model Development
+
+Two models were tested:
+
+* **Random Forest Classifier**
+* **XGBoost Classifier** (selected)
+
+**Why XGBoost?**
+
+* Higher precision-recall balance
+* Handles imbalanced data effectively
+* Native support for feature importance
+
+**Tuning:**
+
+* GridSearchCV with cross-validation to tune:
+
+  * `max_depth`, `learning_rate`, `n_estimators`, `subsample`
+
+---
+
+### 📊 Performance Metrics
+
+| Metric    | Score  |
+| --------- | ------ |
+| Accuracy  | 97.61% |
+| Precision | 96%    |
+| Recall    | 96%    |
+| F1 Score  | 98%    |
+
+✅ Confusion matrix shows very low false positives/negatives, critical for healthcare models.
+
+📌 Note: SMOTE was crucial for avoiding majority-class bias.
+
+---
+## 🌐 Deployment
+
+The model is deployed via **Streamlit**, providing an interactive interface for users to input health parameters and receive real-time diabetes risk predictions.
+
+### How to Run:
+```bash
+git clone https://github.com/rezk1834/diabetes_prediction_app
+cd diabetes_prediction_app
+pip install -r requirements.txt
+streamlit run main_app.py
+````
+
+---
+
+### 📁 Project Structure
 
 ```
 diabetes_prediction_app/
-│
-├── app.py                  # Main Streamlit application
-├── utils.py                # Helper functions
-├── style.css               # Custom CSS for styling
-├── requirements.txt        # Project dependencies
-├── run.sh                  # Setup and run script
-├── README.md               # Project documentation
-├── EDA
-│   ├── Age Distribution by Diabetes Status and Gender.png
-│   ├── Age Distribution.png
-│   ├── Age vs BMI.png
-│   ├── Age vs Diabetes.png
-│   ├── Blood Glucose Level vs Diabetes.png
-│   ├── BMI Distribution by Diabetes Status and Gender.png
-│   ├── BMI vs Diabetes.png         
-│   ├── col Distribution.png
-│   ├── confusion_matrix.png          
-│   ├── Correlation with Diabetes.png
-│   ├── Diabetes Distribution.png
-│   ├── Gender Distribution.png         
-│   ├── Gender vs Diabetes.png
-│   ├── HbA1c level vs Diabetes.png           
-│   ├── pairplot.png
-│   ├── Smoking History Distribution.png
-│   ├── xgb_feature_importances.png               
-│   └──       
-├── models/                 # Saved model files
-│   ├── xgboost_diabetes_model.pkl
-│   └── preprocessor_pipeline.pkl
-└── assets/                 # Images and other static assets
-    └── diabetes_header.png
+├── .ipynb_checkpoints/
+├── assets/
+│   └── diabetes_header.png
+├── EDA/
+│   ├── [EDA Visualizations - 20+ PNGs]
+├── models/
+│   └── [Trained ML models]
+├── Diabetes_DEPI.ipynb         ← Full notebook: EDA + Modeling
+├── main_app.py                 ← Streamlit web app
+├── utils.py                    ← Helper functions
+├── style.css                   ← Custom UI styling
+├── run_script.sh               ← Shell script for deployment
+├── requirements.txt
+└── readme.md
 ```
 
-## Usage
 
-1. Enter your health information in the sidebar:
-   - Age
-   - Gender
-   - BMI (or calculate from height and weight)
-   - HbA1c level
-   - Blood glucose level
-   - Hypertension status
-   - Heart disease status
-   - Smoking history
+Key Features:
 
-2. Click the "Predict Diabetes Risk" button to get your assessment
+* Responsive layout for mobile and desktop
+* Error handling for edge cases
+* Lightweight backend with preloaded XGBoost model
+* Deployed on Streamlit Cloud for public access
 
-3. View your results, including:
-   - Risk prediction with probability
-   - Identified risk factors
-   - Personalized health recommendations
+---
 
-4. Explore the other tabs for:
-   - Educational content about diabetes
-   - Model insights and feature importance
-   - Interactive scenario exploration
+### 🔮 Future Directions
 
-## Customization
+* Incorporate **diet, exercise, sleep** data from wearables
+* Add time-series modeling for tracking patient risk progression
+* Explore **Explainable AI (XAI)** frameworks like SHAP, LIME
+* Integrate into **EHR systems** via APIs
+* Mobile app version for larger-scale public access
 
-You can customize the application by:
+---
 
-1. Modifying the `style.css` file to change the appearance
-2. Adding new visualizations or content in the `app.py` file
-3. Updating the health recommendations logic in `utils.py`
+### 📚 References
 
-## Deployment
+1. [Project Repository](https://github.com/rezk1834/diabetes_prediction_app)
+2. [Deployed Streamlit App](https://diabetespredictionapp-qhgxj9apfkxkxvxzjvvye8.streamlit.app/)
+3. [Kaggle Dataset](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset)
 
-The application can be deployed to Streamlit Cloud, Heroku, or any other platform that supports Python applications.
+---
 
-For Streamlit Cloud:
-1. Push your code to a GitHub repository
-2. Log in to [Streamlit Cloud](https://streamlit.io/cloud)
-3. Create a new app and connect it to your repository
+### 📫 Contact
 
-## License
+GitHub: [rezk1834](https://github.com/rezk1834)
 
-This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
-
-- Data source: [Kaggle Diabetes Prediction Dataset](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset)
