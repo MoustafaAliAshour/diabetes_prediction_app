@@ -21,6 +21,7 @@
 
 [📂 Project Repo](https://github.com/rezk1834/diabetes_prediction_app)
 
+[📂 Project prestation adn Report](https://drive.google.com/drive/folders/1KXV-JqWi-0MnbTiVPT-MR4o0OeLuBasY?usp=drive_link)
 ---
 
 ### 📌 Overview
