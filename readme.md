@@ -17,7 +17,7 @@
 
 [📂 Project Repo](https://github.com/rezk1834/diabetes_prediction_app)
 
-[📂 Project Presntation and Report](https://drive.google.com/drive/folders/1KXV-JqWi-0MnbTiVPT-MR4o0OeLuBasY?usp=drive_link)
+[📂 Project Prestation and Report](https://drive.google.com/drive/folders/1KXV-JqWi-0MnbTiVPT-MR4o0OeLuBasY?usp=drive_link)
 
 ---
 
